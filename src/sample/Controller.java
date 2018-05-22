@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 
 import javax.swing.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -29,17 +30,34 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (this.loginModel.isDatabaseConnection()){
+        if (this.loginModel.isDatabaseConnection()) {
             this.dbStatus.setText("Connected to DB.");
-        }else {
+        } else {
             this.dbStatus.setText("Not Connect to DB.");
         }
+
+
+
     }
 
     @FXML
     public void Login(ActionEvent event){
+//        try {
+//            if (id.equals(username.getText()) && pass.equals(password.getText())) {
+//                JOptionPane.showMessageDialog(null,
+//                        "Welcome to MIT SAIYAI APP");
+//            } else {
+//                JOptionPane.showMessageDialog(null,
+//                        "Your username or password is invalid.",
+//                        "Warning Message",
+//                        JOptionPane.WARNING_MESSAGE);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         try {
-            if (id.equals(username.getText()) && pass.equals(password.getText())) {
+            if (this.loginModel.isLogin(this.username.getText(), this.password.getText())) {
                 JOptionPane.showMessageDialog(null,
                         "Welcome to MIT SAIYAI APP");
             } else {
@@ -48,8 +66,7 @@ public class Controller implements Initializable {
                         "Warning Message",
                         JOptionPane.WARNING_MESSAGE);
             }
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
