@@ -36,6 +36,8 @@ public class Controller implements Initializable {
             this.dbStatus.setText("Not Connect to DB.");
         }
 
+
+
     }
 
     @FXML
