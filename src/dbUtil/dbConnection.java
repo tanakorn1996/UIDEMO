@@ -1,9 +1,8 @@
 package dbUtil;
 
-import jdk.internal.org.objectweb.asm.ClassReader
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class dbConnection {
     private static final String SQCONN = "jdbc:sqlite:mit.sqlite";
@@ -21,7 +20,4 @@ public class dbConnection {
 
     }
 
-
-    private static class SQLException extends Exception {
-    }
 }//class

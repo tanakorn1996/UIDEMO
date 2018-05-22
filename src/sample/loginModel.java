@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class loginModel {
 
@@ -25,15 +24,36 @@ public class loginModel {
         return this.connection != null;
     }
 
-    public boolean isLogin(String)
+    public boolean isLogin(String username, String password) throws SQLException {
         PreparedStatement pr = null;
         ResultSet rs = null;
 
-        String sql = "select * from admin where username"
+        String sql = "select * from admin where username = ? and password = ?";
         try {
-            pr = this.connection.prepareCall(sql);
-            pr.setString(i:1,username);
+            pr = this.connection.prepareStatement(sql);
+            pr.setString(1,username);
+            pr.setString(2,password);
+
+            rs = pr.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        finally {
+            pr.close();
+            rs.close();
+        }
+
     }
+
+
+
+
+
 
 
 }//class
